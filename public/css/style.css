@@ -1,3 +1,11 @@
 body {
     font-family: sans-serif;
 }
+
+.alert-success {
+    color: green;
+}
+
+.alert-danger {
+    color: red;
+}

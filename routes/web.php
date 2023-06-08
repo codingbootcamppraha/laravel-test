@@ -5,6 +5,7 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\VideogameController;
+use App\Http\Controllers\MovieCRUDController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,6 +43,12 @@ Route::get('/top-rated-games', [VideogameController::class, 'topRated']);
 //                   view identifier
 //                          ↓
 Route::view('/welcome', 'welcome');
-
-
 Route::redirect('/vitejte', '/welcome');
+
+
+// Movie CRUD
+Route::get('/movies/create', [MovieCRUDController::class, 'create'])->name('movies.create');
+Route::post('/movies', [MovieCRUDController::class, 'store'])->name('movies.store');
+Route::get('/movies/{id}/edit', [MovieCRUDController::class, 'edit'])->name('movies.edit');
+Route::put('/movies/{id}', [MovieCRUDController::class, 'update'])->name('movies.update');
+Route::delete('/movies/{id}', [MovieCRUDController::class, 'delete'])->name('movies.delete');

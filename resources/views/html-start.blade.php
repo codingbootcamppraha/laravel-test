@@ -11,3 +11,4 @@
 <body>
 
     @include('navigation')
+    @include('messages')

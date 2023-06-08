@@ -161,9 +161,11 @@ class MovieController extends Controller
         ]);
     }
 
-    public function search()
+    public function search(Request $request)
     {
-        $search_term = $_GET['search'] ?? null;
+        dd($request->all());
+//        $search_term = $_GET['search'] ?? null;
+        $search_term = $request->input('search');
 
         if ($search_term) {
             $results = Movie::query()
