@@ -63,4 +63,14 @@ class IndexController extends Controller
 
         return view('index.index', compact('movie_of_the_week', 'person_of_the_week'));
     }
+
+
+    public function movieDetail()
+    {
+        $movie_id = $_GET['id'] ?? null;
+
+        $movie = Movie::findOrFail($movie_id);
+
+        dd($movie);
+    }
 }
