@@ -30,3 +30,6 @@ Route::get('/sample-movie', [IndexController::class, 'movieDetail']);
 Route::get('/movies', [MovieController::class, 'index']);
 Route::get('/games', [MovieController::class, 'games']);
 Route::get('/romance', [MovieController::class, 'romance']);
+
+Route::get('/movies/edit', [MovieController::class, 'edit']);
+Route::post('/movies/edit', [MovieController::class, 'save']);

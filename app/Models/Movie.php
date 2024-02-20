@@ -9,6 +9,9 @@ class Movie extends Model
 {
     use HasFactory;
 
+    // this table does not have created_at or updated_at
+    public $timestamps = false;
+
     public function movieType()
     {
         // `movie_types`

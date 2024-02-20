@@ -45,6 +45,36 @@ class MovieController extends Controller
                 ->get();
 
         dd($romance_movies);
+    }
 
+    /**
+     * displays an edit form for a movie
+     */
+    public function edit()
+    {
+        $movie_id = 111161;
+
+        $movie = Movie::findOrFail($movie_id);
+
+        // display the form
+        return view('movie.edit', compact('movie'));
+    }
+
+    public function save()
+    {
+        // handle the form's submission
+
+        $movie_id = 111161;
+
+        $movie = Movie::findOrFail($movie_id);
+
+        $movie->name = $_POST['name'] ?? $movie->name;
+        $movie->year = $_POST['year'] ?? $movie->year;
+
+        $movie->genres()->sync([37, 43]);
+
+        $movie->save();
+
+        return redirect('/movies/edit');
     }
 }
