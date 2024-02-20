@@ -16,5 +16,9 @@
 
     <h3><?= $movie_of_the_week->name ?></h3>
 
+    <h2>Person of the week:</h2>
+
+    <h3><?= $person_of_the_week->fullname ?></h3>
+
 </body>
 </html>
