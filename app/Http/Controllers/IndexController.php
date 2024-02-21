@@ -59,18 +59,16 @@ class IndexController extends Controller
         //         ->where('votes_nr', '>=', 10000)
         //         ->get();
 
-        dd($all_movies);
+        // dd($all_movies);
 
         return view('index.index', compact('movie_of_the_week', 'person_of_the_week'));
     }
 
 
-    public function movieDetail()
+    public function movieDetail($bob)
     {
-        $movie_id = $_GET['id'] ?? null;
+        $movie = Movie::findOrFail($bob);
 
-        $movie = Movie::findOrFail($movie_id);
-
-        dd($movie);
+        dd($movie->id . ': ' . $movie->name);
     }
 }

@@ -8,6 +8,10 @@
 </head>
 <body>
 
+    @include('common.header', [
+        'current' => 'home'
+    ])
+
     <h1>My Movie Website</h1>
 
     <p>Welcome to My Movie Website</p>

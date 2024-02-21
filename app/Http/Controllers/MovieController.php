@@ -9,18 +9,31 @@ use Illuminate\Http\Request;
 
 class MovieController extends Controller
 {
-    public function index()
+    public function index($year = null, $min_rating = null)
     {
         // SELECT *
         // FROM `movies`
         // ORDER BY `name` ASC
         // LIMIT 20
 
-        $movies = Movie::orderBy('name', 'asc')
+        if ($year && !preg_match('#^\d{4}$#', $year)) {
+            // custom treatment of invalid year format
+        }
+
+        $query_builder = Movie::orderBy('name', 'asc')
             ->where('name', '!=', '')
             ->where('votes_nr', '>=', 10000)
-            ->limit(20)
-            ->get();
+            ->limit(20);
+
+        if ($year) {
+            $query_builder->where('year', $year);
+        }
+
+        if ($min_rating) {
+            $query_builder->where('rating', '>=', $min_rating);
+        }
+
+        $movies = $query_builder->get();
 
         return view('movie.index', compact('movies'));
     }

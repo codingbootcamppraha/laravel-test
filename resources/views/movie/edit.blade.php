@@ -1,4 +1,7 @@
-<form action="/movies/edit" method="post">
+
+@include('common.header')
+
+<form action="{{ route('movies.save') }}" method="post">
 
     @csrf
 

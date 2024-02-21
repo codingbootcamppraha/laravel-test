@@ -8,16 +8,34 @@
 </head>
 <body>
 
+    @include('common.header', [
+        'current' => 'movies'
+    ])
+
+    @foreach (range(2000, 2015) as $year)
+        <a href="{{ route('movies.index', ['year' => $year]) }}">Movies from {{ $year }}</a>
+
+        Rating:
+        @foreach (range(0, 9) as $min_rating)
+            <a href="{{ route('movies.index', ['year' => $year, 'min_rating' => $min_rating]) }}">{{ $min_rating }}</a>
+        @endforeach
+        <br>
+    @endforeach
+
+
+
     <ul>
-        <?php foreach ($movies as $movie) : ?>
+        @foreach ($movies as $movie)
             <li>
-                <strong><?= $movie->name ?></strong>
+                <a href="{{ route('movies.detail', ['movie_id' => $movie->id]) }}">
+                    <strong>{{ $movie->name }}</strong>
+                </a>
                 <br>
-                <?= $movie->movieType->name ?>
+                {{ $movie->movieType->name }}
                 <br>
-                <?= $movie->genres->pluck('name')->join(', ') ?>
+                {{ $movie->genres->pluck('name')->join(', ') }}
             </li>
-        <?php endforeach; ?>
+        @endforeach
     </ul>
 
 </body>
