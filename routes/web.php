@@ -4,6 +4,7 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AwardController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\MovieRequestController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,6 +43,9 @@ Route::get('/movies/edit', [MovieController::class, 'edit'])->name('movies.edit'
 Route::post('/movies/edit', [MovieController::class, 'save'])->name('movies.save');
 
 Route::get('/about-us', [AboutController::class, 'aboutUs'])->name('about-us');
+
+Route::get('/movie-requests', [MovieRequestController::class, 'index'])->name('movie-requests');
+Route::post('/movie-requests/store', [MovieRequestController::class, 'store'])->name('movie-request.store');
 
 // when the user comes with GET request to /welcome,
 // display the view /resources/views/welcome.blade.php
