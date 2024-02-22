@@ -46,7 +46,7 @@
                 Person: {{ $movie_request->full_name }} <br>
                 Person email: {{ $movie_request->email }} <br>
                 Movie name: {{ $movie_request->name }} <br>
-
+                <a href="{{ route('movie-request.edit', ['id' => $movie_request->id]) }}">Edit</a>
             </li>
         @endforeach
     </ul>

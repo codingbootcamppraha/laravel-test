@@ -46,6 +46,8 @@ Route::get('/about-us', [AboutController::class, 'aboutUs'])->name('about-us');
 
 Route::get('/movie-requests', [MovieRequestController::class, 'index'])->name('movie-requests');
 Route::post('/movie-requests/store', [MovieRequestController::class, 'store'])->name('movie-request.store');
+Route::get('/movie-requests/edit/{id}', [MovieRequestController::class, 'edit'])->name('movie-request.edit');
+Route::put('/movie-requests/update/{id}', [MovieRequestController::class, 'update'])->name('movie-request.update');
 
 // when the user comes with GET request to /welcome,
 // display the view /resources/views/welcome.blade.php

@@ -18,7 +18,7 @@ class MovieRequestController extends Controller
         $search_query = $request->input('search');
 
         $movie_requests_query = MovieRequest::query();
- 
+
         if ($search_query) {
             $movie_requests_query->where('name', $search_query);
         }
@@ -59,4 +59,41 @@ class MovieRequestController extends Controller
 
         return redirect()->back();
     }
+
+    public function edit($id)
+    {
+        $movie_types = MovieType::get();
+
+        $movie_request = MovieRequest::findOrFail($id);
+
+        // if (!$movie_request) {
+        //     return redirect()->back();
+        // }
+
+        return view('movie-request.edit', compact('movie_types', 'movie_request'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $movie_request = MovieRequest::findOrFail($id);
+
+        $this->validate($request, [
+            'name' => 'required',
+            'full_name' => 'required',
+            'email' => 'required',
+            'movie_type_id' => 'required',
+        ], [
+            'name.required' => 'U DID NOT ENTER YOUR NAME!'
+        ]);
+
+        $movie_request->name = $request->input('name');
+        $movie_request->full_name = $request->input('full_name');
+        $movie_request->email = $request->input('email');
+        $movie_request->movie_type_id = $request->input('movie_type_id');
+        $movie_request->save();
+
+        return redirect()->route('movie-requests');
+
+    }
+
 }
