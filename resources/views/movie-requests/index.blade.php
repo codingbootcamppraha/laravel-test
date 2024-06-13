@@ -21,6 +21,7 @@
             <th>Movie name</th>
             <th>Movie type</th>
             <th>Movie year</th>
+            <th></th>
         </thead>
         <tbody>
             @foreach ($movie_requests as $movie_request)
@@ -31,6 +32,7 @@
                     <td>{{ $movie_request->name }}</td>
                     <td>{{ $movie_request->movieType->name }}</td>
                     <td>{{ $movie_request->year }}</td>
+                    <td><a href="{{ route('movie-requests.edit', $movie_request->id) }}">Edit</a></td>
                 </tr>
             @endforeach
         </tbody>

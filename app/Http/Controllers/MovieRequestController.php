@@ -21,15 +21,20 @@ class MovieRequestController extends Controller
         return view('movie-requests.index', compact('movie_requests'));
     }
 
-
-    public function create()
+    public function create(Request $request, $id = null)
     {
         $movie_types = MovieType::get();
 
-        return view('movie-requests.create', compact('movie_types'));
+        if ($id) {
+            $movie_request = MovieRequest::findOrFail($id);
+        } else {
+            $movie_request = new MovieRequest;
+        }
+
+        return view('movie-requests.create', compact('movie_types', 'movie_request', 'id'));
     }
     
-    public function store(Request $request)
+    public function store(Request $request, $id = null)
     {
         // validate request 
 
@@ -41,6 +46,8 @@ class MovieRequestController extends Controller
         //     'year' => 'required',
         //     'movie_type_id' => 'required'
         // ]);
+
+        // get valid movie type ids
         $movie_type_ids = MovieType::get()->pluck('id');
         
         // used now:
@@ -57,8 +64,13 @@ class MovieRequestController extends Controller
             'email.required' => 'OH NO, PLEASE GIVE US YOUR EMAIL :('
         ]);
 
-        // create new movie request object
-        $movie_request = new MovieRequest;
+        if ($id) {
+            $movie_request = MovieRequest::findOrFail($id);
+        } else {
+            // create new movie request object
+            $movie_request = new MovieRequest;
+        }
+
         $movie_request->full_name = $request->input('full_name');
         $movie_request->email = $request->input('email');
         $movie_request->name = $request->input('name');

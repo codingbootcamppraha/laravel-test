@@ -6,7 +6,11 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Submit a movie request:</h1>
+    @if ($id)
+        <h1>Edit movie request #{{$id}}:</h1>
+    @else
+        <h1>Submit a movie request:</h1>
+    @endif
     @if ($errors->any())
         <ul>
             @foreach ($errors->all() as $error)
@@ -14,20 +18,25 @@
             @endforeach
         </ul>
     @endif
-    <form action="{{ route('movie-requests.store') }}" method="post">
+
+    @if ($movie_request->id)
+        <form action="{{ route('movie-requests.store', $movie_request->id) }}" method="post">
+    @else
+        <form action="{{ route('movie-requests.store') }}" method="post">
+    @endif
         @csrf
         Your full name: <br>
-        <input type="text" name="full_name"> <br>
+        <input type="text" name="full_name" value="{{ old('full_name', $movie_request->full_name) }}"> <br>
         Your email: <br>
-        <input type="email" name="email"> <br>
+        <input type="email" name="email" value="{{ old('email', $movie_request->email) }}"> <br>
         Movie name: <br>
-        <input type="text" name="name"> <br>
+        <input type="text" name="name" value="{{ old('name', $movie_request->name) }}"> <br>
         Movie release year: <br>
-        <input type="number" name="year"> <br>
+        <input type="number" name="year" value="{{ old('year', $movie_request->year) }}"> <br>
         Movie type: <br>
         <select name="movie_type_id">
             @foreach ($movie_types as $type)
-                <option value="{{ $type->id }}">{{ $type->name }}</option>
+                <option value="{{ $type->id }}" {{ old('movie_type_id', $movie_request->movie_type_id) == $type->id ? 'selected' : '' }}>{{ $type->name }}</option>
             @endforeach
             <option value="100">100</option>
         </select>
