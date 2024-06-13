@@ -7,7 +7,15 @@
 </head>
 <body>
     <h1>Submit a movie request:</h1>
-    <form action="">
+    @if ($errors->any())
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    @endif
+    <form action="{{ route('movie-requests.store') }}" method="post">
+        @csrf
         Your full name: <br>
         <input type="text" name="full_name"> <br>
         Your email: <br>
@@ -21,6 +29,7 @@
             @foreach ($movie_types as $type)
                 <option value="{{ $type->id }}">{{ $type->name }}</option>
             @endforeach
+            <option value="100">100</option>
         </select>
         <br>
         <br>

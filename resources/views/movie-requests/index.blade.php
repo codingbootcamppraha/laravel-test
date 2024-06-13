@@ -7,6 +7,12 @@
 </head>
 <body>
     <h1>Movie requests list:</h1>
+    @if (session()->has('success_message'))                     
+        {{-- Session::has() --}}
+        <p>
+            {{ session()->get('success_message') }}
+        </p>
+    @endif
     <table>
         <thead>
             <th>#</th>
