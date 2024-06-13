@@ -6,11 +6,14 @@
     <title>Document</title>
 </head>
 <body>
+    {{-- Check what text you should display depending on if movie request is edited or being created --}}
     @if ($movie_request->id)
-        <h1>Edit movie request #{{$id}}:</h1>
+        <h1>Edit movie request #{{$movie_request->id}}:</h1>
     @else
         <h1>Submit a movie request:</h1>
     @endif
+
+    {{-- Display validation errors --}}
     @if ($errors->any())
         <ul>
             @foreach ($errors->all() as $error)
@@ -19,13 +22,16 @@
         </ul>
     @endif
 
+    {{-- Check what url you should use depending on if movie request is being updated or created --}}
     @if ($movie_request->id)
         <form action="{{ route('movie-requests.store', $movie_request->id) }}" method="post">
     @else
         <form action="{{ route('movie-requests.store') }}" method="post">
     @endif
+        {{-- Use CSRF token to submit post data safely --}}
         @csrf
         Your full name: <br>
+        {{-- For each field use a value that you can get with old(), it will allow you to flash previously made request values  --}}
         <input type="text" name="full_name" value="{{ old('full_name', $movie_request->full_name) }}"> <br>
         Your email: <br>
         <input type="email" name="email" value="{{ old('email', $movie_request->email) }}"> <br>
