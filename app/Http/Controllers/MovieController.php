@@ -46,9 +46,16 @@ class MovieController extends Controller
         return view('movies.detail', compact('movie', 'people'));
     }
 
-    public function show()
+    public function show(Request $request)
     {
-        $movie = DB::selectOne('SELECT * FROM movies WHERE id LIKE ' . $_GET['id']);
+        // previously with global variable like this: $_GET['id']
+        // now:
+        // $movie_id = $request->query('id');
+
+        $data = $request->all();
+        $movie_id = $data['id'] ?? null;
+
+        $movie = DB::selectOne('SELECT * FROM movies WHERE id LIKE ' . $movie_id);
         
         if ($movie) {
             $people = DB::select('SELECT people.*, movie_person.*, positions.name as position_name from people LEFT JOIN movie_person ON people.id = movie_person.person_id LEFT JOIN positions ON movie_person.position_id = positions.id WHERE movie_person.movie_id LIKE '.$movie->id);

@@ -17,3 +17,4 @@ Route::get('/awards', [App\Http\Controllers\AwardController::class, 'index']);
 Route::get('/genres', [App\Http\Controllers\GenreController::class, 'index']);
 Route::get('/actors/detail', [App\Http\Controllers\ActorController::class, 'show']);
 Route::get('/movie-requests', [App\Http\Controllers\MovieRequestController::class, 'index']);
+Route::get('/movie-requests/create', [App\Http\Controllers\MovieRequestController::class, 'create']);
