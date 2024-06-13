@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    @if ($id)
+    @if ($movie_request->id)
         <h1>Edit movie request #{{$id}}:</h1>
     @else
         <h1>Submit a movie request:</h1>

@@ -31,7 +31,7 @@ class MovieRequestController extends Controller
             $movie_request = new MovieRequest;
         }
 
-        return view('movie-requests.create', compact('movie_types', 'movie_request', 'id'));
+        return view('movie-requests.create', compact('movie_types', 'movie_request'));
     }
     
     public function store(Request $request, $id = null)
